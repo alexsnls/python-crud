@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block conteudo %}
+<form method="post">
+    <div class="mb-3">
+        <label>Nome:</label>
+        <input type="text" name="nome" value="{{ produto[1] }}" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label>Preço:</label>
+        <input type="number" step="0.01" name="preco" value="{{ produto[2] }}" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label>Quantidade:</label>
+        <input type="number" name="quantidade" value="{{ produto[3] }}" class="form-control" required>
+    </div>
+    <button class="btn btn-primary">Atualizar</button>
+    <a href="{{ url_for('index') }}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

@@ -1,0 +1,39 @@
+<!-- Extensão do Template Base -->
+{% extends 'base.html' %}
+<!-- Bloco de Conteúdo -->
+{% block conteudo %}
+<!-- Botão Novo Produto -->
+<a href="{{ url_for('criar') }}" class="btn btn-success mb-3">Novo Produto</a>
+<!-- Tabela de Produtos -->
+<table class="table table-striped">
+    <!-- Cabeçalho da Tabela -->
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Preço</th>
+            <th>Quantidade</th>
+            <th>Subtotal</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <!-- Corpo da Tabela com Loop -->
+    <tbody>
+        {% for p in produtos %}
+        <tr>
+            <td>{{ p[0] }}</td> <!-- ID -->
+            <td>{{ p[1] }}</td> <!-- Nome -->
+            <td>R$ {{ "%.2f"|format(p[2]) }}</td> <!-- Preço -->
+            <td>{{ p[3] }}</td> <!-- Quantidade -->
+            <td>R$ {{ "%.2f"|format(p[4]) }}</td> <!-- Subtotal -->
+            <td>
+                <a href="{{ url_for('editar', id=p[0]) }}" class="btn btn-primary btn-sm">Editar</a>
+                <a href="{{ url_for('deletar', id=p[0]) }}" class="btn btn-danger btn-sm"
+                    onclick="return confirm('Tem certeza?')">Excluir</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    <!-- Fechamento da Tabela e do Bloco -->
+</table>
+{% endblock %}
