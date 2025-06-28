@@ -66,6 +66,18 @@ def deletar(id):
         conn.execute("DELETE FROM produtos WHERE id=?", (id,))
     return redirect(url_for('index'))
 
+# Rota para pesquisar produtos
+@app.route('/pesquisar', methods=['GET'])
+def pesquisar():
+    termo = request.args.get('q', '')
+    with sqlite3.connect(DB) as conn:
+        cursor = conn.execute(
+            "SELECT * FROM produtos WHERE nome LIKE ? ORDER BY id DESC",
+            (f'%{termo}%',)
+        )
+        produtos = cursor.fetchall()
+    return render_template('index.html', produtos=produtos, termo=termo)
+
 # Rodar Aplicacao
 if __name__ == '__main__':
     app.run(debug=True)

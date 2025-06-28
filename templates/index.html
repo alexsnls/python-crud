@@ -2,6 +2,12 @@
 {% extends 'base.html' %}
 <!-- Bloco de Conteúdo -->
 {% block conteudo %}
+<!-- Barra de Pesquisa -->
+<form method="get" action="{{ url_for('pesquisar') }}" class="mb-3 d-flex" style="gap: 8px;">
+    <input type="text" name="q" class="form-control" placeholder="Pesquisar produto..." value="{{ termo|default('') }}">
+    <button type="submit" class="btn btn-primary">Pesquisar</button>
+    <a href="{{ url_for('index') }}" class="btn btn-secondary">Limpar</a>
+</form>
 <!-- Botão Novo Produto -->
 <a href="{{ url_for('criar') }}" class="btn btn-success mb-3">Novo Produto</a>
 <!-- Tabela de Produtos -->
